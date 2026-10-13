@@ -20,7 +20,8 @@ export default defineComponent({
     return {
       player_name: 'pilot',
       score: 0,
-      modifier: 3.0,
+      round_bonus: 100,
+      perfect_bonus: 100,
       level: 1,
       time: 60000,
       all_stratagems: Stratagems as Stratagem[],
@@ -29,6 +30,8 @@ export default defineComponent({
       sequence_index: 0,
       arrow_index: 0,
       isShaking: false,
+      levelStats: false,
+      gameOver: false,
     }
   },
   computed: {
@@ -80,18 +83,39 @@ export default defineComponent({
       if (mappedDirection === expectedDirection) {
         this.arrow_index++
       } else {
-        if (this.modifier > 1.0) {
-          this.modifier = this.modifier - 0.25
+        if (this.round_bonus > 0) {
+          this.round_bonus -= 25
         }
+        this.perfect_bonus = 0
         this.arrow_index = 0
         this.triggerShake()
       }
+
+      if (this.arrow_index + 1 > this.currentStratagem.code.length) {
+        this.sequence_index++
+        this.arrow_index = 0
+        if (this.sequence_index + 1 > this.strata_sequence.length) {
+          this.endLevel()
+        }
+      }
+    },
+    endLevel() {
+      this.levelStats = true
+      this.score = Math.floor(this.score + this.time / 6000 + this.perfect_bonus + this.round_bonus)
+      this.level++
+      setTimeout(() => {
+        this.levelStats = false
+        this.perfect_bonus = 100
+        this.round_bonus = 100
+        this.time = 60000 - this.level * 2500
+        this.rndStrataSequence()
+      }, 8000)
     },
     triggerShake() {
       this.isShaking = true
       setTimeout(() => {
         this.isShaking = false
-      }, 820)
+      }, 420)
     },
   },
 })
@@ -100,8 +124,40 @@ export default defineComponent({
 <template>
   <main class="game-main">
     <div class="game-container">
-      <div v-if="strata_sequence.length > 0" class="sequence-display">
-        <h3>Level: {{ level }} | Modifier: {{ modifier }}x</h3>
+      <div v-if="levelStats && !gameOver">
+        <h1>Level: {{ level }}</h1>
+        <div class="stats"></div>
+        <table>
+          <tbody>
+            <tr>
+              <td class="stat-name">Round bonus</td>
+              <td class="table-space"></td>
+              <td class="stat-score">{{ round_bonus }}</td>
+            </tr>
+            <tr>
+              <td class="stat-name">Time Bonus</td>
+              <td class="table-space"></td>
+              <td class="stat-score">67</td>
+            </tr>
+            <tr>
+              <td class="stat-name">Perfect Bonus</td>
+              <td class="table-space"></td>
+              <td class="stat-score">{{ perfect_bonus }}</td>
+            </tr>
+            <tr>
+              <td class="stat-name">Total Score</td>
+              <td class="table-space"></td>
+              <td class="stat-score">{{ score }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div v-if="gameOver">
+        <h1>GAME OVER</h1>
+        <p class="placeholder-text">SYSTEM READY. WAITING FOR PILOT...</p>
+      </div>
+      <div v-if="!levelStats && !gameOver" class="sequence-display">
+        <h3>Level: {{ level }}</h3>
         <h2 class="strat-name">{{ currentStratagem?.name }}</h2>
         <img :src="currentStratagem?.path" class="strata-picture" />
         <div class="arrows-container" :class="{ shake: isShaking }">
@@ -114,7 +170,7 @@ export default defineComponent({
           />
         </div>
       </div>
-      <p v-else class="placeholder-text">SYSTEM READY. WAITING FOR PILOT...</p>
+      <!-- <p v-else class="placeholder-text">SYSTEM READY. WAITING FOR PILOT...</p> -->
     </div>
   </main>
 </template>
@@ -178,6 +234,29 @@ export default defineComponent({
 
 .arrow-passed {
   opacity: 1;
+}
+
+h1 {
+  text-align: center;
+}
+
+table {
+  border: none;
+  font-size: 24px;
+  width: 100%;
+  font-weight: bold;
+}
+
+.table-space {
+  width: 6rem;
+}
+
+.stat-name {
+  text-align: left;
+}
+
+.stat-score {
+  text-align: right;
 }
 
 .shake {
