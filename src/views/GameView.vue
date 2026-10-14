@@ -1,11 +1,64 @@
 <script setup lang="ts">
 import Game from '../components/GameApp.vue'
+
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const audio = ref(null)
+const isBlocked = ref(false)
+
+onMounted(() => {
+  setTimeout(() => {
+    audio.value = new Audio('/src/assets/sound/helldivers2_8bit.webm')
+
+    audio.value.loop = true
+    audio.value.volume = 0.5
+
+    playMusic()
+  }, 3000)
+})
+
+const toggleMusic = () => {
+  if (!audio.value) return
+
+  if (audio.value.paused) {
+    audio.value.play()
+  } else {
+    audio.value.pause()
+  }
+}
+
+const playMusic = () => {
+  if (!audio.value) return
+
+  audio.value
+    .play()
+    .then(() => {
+      isBlocked.value = false
+    })
+    .catch((error: any) => {
+      console.warn('Autoplay was blocked by the browser. Awaiting user interaction.', error)
+      isBlocked.value = true
+    })
+}
+
+onUnmounted(() => {
+  if (audio.value) {
+    audio.value.pause()
+    audio.value = null
+  }
+})
 </script>
 
 <template>
   <div class="game-wrapper">
     <header class="super-header">
       <h3>SUPER EARTH ARMED FORCES - STRATAGEM HERO</h3>
+      <input
+        type="image"
+        class="header-buttons"
+        src="src/assets/icons/music-icon.svg"
+        @click="toggleMusic()"
+      />
     </header>
     <Game />
     <footer class="super-footer">
@@ -44,10 +97,15 @@ import Game from '../components/GameApp.vue'
   border-bottom: 4px solid #b38b1e;
   text-transform: uppercase;
   box-shadow: 0 4px 10px #b38b1e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .super-header h3 {
   margin: 0;
+  flex: 1;
+  text-align: center;
   font-size: 1.25rem;
 }
 
@@ -74,6 +132,13 @@ import Game from '../components/GameApp.vue'
 
 .marquee-content span {
   padding-right: 60rem;
+}
+
+.header-buttons {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: transform 0.1s ease;
 }
 
 @keyframes scroll-right {
