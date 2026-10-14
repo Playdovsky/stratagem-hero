@@ -2,6 +2,7 @@
 import { defineComponent } from 'vue'
 import { Stratagems } from '@/assets/stratagems/helldivers-stratagems-data-sample.js'
 import { Arrows } from '@/assets/stratagems/helldivers-stratagems-arrows.js'
+import TimerBar from '@/components/TimerBar.vue'
 
 interface Stratagem {
   name: string
@@ -16,6 +17,9 @@ interface Arrow {
 }
 
 export default defineComponent({
+  components: {
+    TimerBar,
+  },
   data() {
     return {
       player_name: 'pilot',
@@ -23,7 +27,9 @@ export default defineComponent({
       round_bonus: 100,
       perfect_bonus: 100,
       level: 1,
-      time: 60000,
+      time: 40000,
+      time_bonus: 0,
+      isTimerRunning: true,
       all_stratagems: Stratagems as Stratagem[],
       all_arrows: Arrows as Arrow[],
       strata_sequence: [] as Stratagem[],
@@ -101,13 +107,14 @@ export default defineComponent({
     },
     endLevel() {
       this.levelStats = true
-      this.score = Math.floor(this.score + this.time / 6000 + this.perfect_bonus + this.round_bonus)
       this.level++
+      this.time_bonus = (this.level * (60000 - this.time)) / 1000
+      this.score = Math.floor(this.score + this.time_bonus + this.perfect_bonus + this.round_bonus)
       setTimeout(() => {
         this.levelStats = false
         this.perfect_bonus = 100
         this.round_bonus = 100
-        this.time = 60000 - this.level * 2500
+        this.time = 40000 - this.level * 5000
         this.rndStrataSequence()
       }, 8000)
     },
@@ -117,6 +124,11 @@ export default defineComponent({
         this.isShaking = false
       }, 420)
     },
+    handleTimeout() {
+      console.log('Timeout! Game over.')
+      this.isTimerRunning = false
+      this.gameOver = true
+    },
   },
 })
 </script>
@@ -125,7 +137,7 @@ export default defineComponent({
   <main class="game-main">
     <div class="game-container">
       <div v-if="levelStats && !gameOver">
-        <h1>Level: {{ level }}</h1>
+        <h1>LEVEL {{ level }}</h1>
         <div class="stats"></div>
         <table>
           <tbody>
@@ -137,7 +149,7 @@ export default defineComponent({
             <tr>
               <td class="stat-name">Time Bonus</td>
               <td class="table-space"></td>
-              <td class="stat-score">67</td>
+              <td class="stat-score">{{ time_bonus }}</td>
             </tr>
             <tr>
               <td class="stat-name">Perfect Bonus</td>
@@ -154,10 +166,10 @@ export default defineComponent({
       </div>
       <div v-if="gameOver">
         <h1>GAME OVER</h1>
-        <p class="placeholder-text">SYSTEM READY. WAITING FOR PILOT...</p>
       </div>
       <div v-if="!levelStats && !gameOver" class="sequence-display">
-        <h3>Level: {{ level }}</h3>
+        <h2>Level: {{ level }}</h2>
+        <TimerBar :time="time" :running="isTimerRunning" @timeout="handleTimeout" />
         <h2 class="strat-name">{{ currentStratagem?.name }}</h2>
         <img :src="currentStratagem?.path" class="strata-picture" />
         <div class="arrows-container" :class="{ shake: isShaking }">
@@ -186,11 +198,12 @@ export default defineComponent({
 
 .game-container {
   width: 100%;
-  max-width: 1000px;
-  height: 600px;
+  max-width: 800px;
+  height: 500px;
   background-color: #1a1d23;
   border: 3px solid #ffc72c;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   box-shadow: 0 4px 10px #b38b1e;
@@ -203,7 +216,10 @@ export default defineComponent({
 }
 
 .sequence-display {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .strat-name {
@@ -257,6 +273,10 @@ table {
 
 .stat-score {
   text-align: right;
+}
+
+h1 {
+  letter-spacing: 0.75rem;
 }
 
 .shake {
