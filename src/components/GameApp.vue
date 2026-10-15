@@ -45,6 +45,14 @@ export default defineComponent({
       if (this.strata_sequence.length === 0) return null
       return this.strata_sequence[this.sequence_index]
     },
+    nextStratagem(): Stratagem | null {
+      if (this.strata_sequence.length === 0) return null
+      return this.strata_sequence[this.sequence_index + 1]
+    },
+    previousStratagem(): Stratagem | null {
+      if (this.strata_sequence.length === 0) return null
+      return this.strata_sequence[this.sequence_index - 1]
+    },
   },
   mounted() {
     this.rndStrataSequence()
@@ -173,7 +181,17 @@ export default defineComponent({
         <h2>Level: {{ level }}</h2>
         <TimerBar :time="time" :running="isTimerRunning" @timeout="handleTimeout" />
         <h2 class="strat-name">{{ currentStratagem?.name }}</h2>
-        <img :src="currentStratagem?.path" class="strata-picture" />
+        <div class="strata-pictures">
+          <img
+            v-if="previousStratagem"
+            :src="previousStratagem?.path"
+            class="side-strata-picture"
+          />
+          <div v-else class="side-strata-placeholder"></div>
+          <img :src="currentStratagem?.path" class="strata-picture" />
+          <img v-if="nextStratagem" :src="nextStratagem?.path" class="side-strata-picture" />
+          <div v-else class="side-strata-placeholder"></div>
+        </div>
         <div class="arrows-container" :class="{ shake: isShaking }">
           <img
             v-for="(arrow, a) in currentStratagem?.code"
@@ -200,8 +218,8 @@ export default defineComponent({
 
 .game-container {
   width: 100%;
-  max-width: 800px;
-  height: 500px;
+  max-width: 50rem;
+  height: 35rem;
   background-color: #1a1d23;
   border: 3px solid #ffc72c;
   display: flex;
@@ -230,11 +248,32 @@ export default defineComponent({
   color: #ffc72c;
 }
 
-.strata-picture {
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
+.strata-pictures {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  width: 100%;
   margin-bottom: 1.5rem;
+}
+
+.strata-picture {
+  width: 8rem;
+  object-fit: contain;
+  opacity: 1;
+}
+
+.side-strata-picture {
+  width: 7rem;
+  object-fit: contain;
+  opacity: 0.5;
+}
+
+.side-strata-placeholder {
+  width: 7rem;
+  visibility: hidden;
 }
 
 .arrows-container {
@@ -244,8 +283,7 @@ export default defineComponent({
 }
 
 .arrow-icon {
-  width: 35px;
-  height: 35px;
+  width: 2.5rem;
   object-fit: contain;
   opacity: 0.5;
 }
