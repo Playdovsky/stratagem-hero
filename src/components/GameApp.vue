@@ -166,6 +166,8 @@ export default defineComponent({
       </div>
       <div v-if="gameOver">
         <h1>GAME OVER</h1>
+        <h2 class="stat-name">total score</h2>
+        <h1 class="stat-score">{{ score }}</h1>
       </div>
       <div v-if="!levelStats && !gameOver" class="sequence-display">
         <h2>Level: {{ level }}</h2>
@@ -252,10 +254,6 @@ export default defineComponent({
   opacity: 1;
 }
 
-h1 {
-  text-align: center;
-}
-
 table {
   border: none;
   font-size: 24px;
@@ -273,9 +271,15 @@ table {
 
 .stat-score {
   text-align: right;
+  color: #ffc72c;
+}
+
+h2 {
+  text-align: center !important;
 }
 
 h1 {
+  text-align: center !important;
   letter-spacing: 0.75rem;
 }
 

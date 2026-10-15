@@ -4,7 +4,6 @@ import Game from '../components/GameApp.vue'
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const audio = ref(null)
-const isBlocked = ref(false)
 
 onMounted(() => {
   setTimeout(() => {
@@ -30,15 +29,7 @@ const toggleMusic = () => {
 const playMusic = () => {
   if (!audio.value) return
 
-  audio.value
-    .play()
-    .then(() => {
-      isBlocked.value = false
-    })
-    .catch((error: any) => {
-      console.warn('Autoplay was blocked by the browser. Awaiting user interaction.', error)
-      isBlocked.value = true
-    })
+  audio.value.play()
 }
 
 onUnmounted(() => {
