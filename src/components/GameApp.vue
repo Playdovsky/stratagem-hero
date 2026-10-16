@@ -22,7 +22,7 @@ export default defineComponent({
   },
   data() {
     return {
-      player_name: 'pilot',
+      player_name: '',
       score: 0,
       round_bonus: 100,
       perfect_bonus: 100,
@@ -37,6 +37,7 @@ export default defineComponent({
       arrow_index: 0,
       isShaking: false,
       levelStats: false,
+      gameStart: true,
       gameOver: false,
     }
   },
@@ -55,13 +56,29 @@ export default defineComponent({
     },
   },
   mounted() {
-    this.rndStrataSequence()
     window.addEventListener('keydown', this.handleKeyDown)
   },
   beforeUnmount() {
     window.removeEventListener('keydown', this.handleKeyDown)
   },
   methods: {
+    start() {
+      if (!this.player_name.trim()) {
+        this.player_name = 'Super Earth Pilot'
+      }
+
+      this.score = 0
+      this.level = 1
+      this.sequence_index = 0
+      this.arrow_index = 0
+      this.time = 40000
+
+      this.gameStart = false
+      this.gameOver = false
+      this.isTimerRunning = true
+
+      this.rndStrataSequence()
+    },
     rndStrataSequence() {
       this.strata_sequence = []
       this.sequence_index = 0
@@ -122,9 +139,9 @@ export default defineComponent({
         this.levelStats = false
         this.perfect_bonus = 100
         this.round_bonus = 100
-        this.time = 40000 - this.level * 5000
+        this.time = Math.max(10000, 40000 - (this.level - 1) * 5000)
         this.rndStrataSequence()
-      }, 8000)
+      }, 6000)
     },
     triggerShake() {
       this.isShaking = true
@@ -136,6 +153,32 @@ export default defineComponent({
       console.log('Timeout! Game over.')
       this.isTimerRunning = false
       this.gameOver = true
+      this.saveScoreToLocalStorage()
+    },
+    saveScoreToLocalStorage() {
+      const storageKey = 'stratagem-hero_leaderboard'
+      const savedData = localStorage.getItem(storageKey)
+      let leaderboard: { name: string; score: number }[] = savedData ? JSON.parse(savedData) : []
+
+      const existingPlayerIndex = leaderboard.findIndex(
+        (p) => p.name.toLowerCase() === this.player_name.toLowerCase(),
+      )
+
+      if (existingPlayerIndex !== -1) {
+        if (this.score > leaderboard[existingPlayerIndex].score) {
+          leaderboard[existingPlayerIndex].score = this.score
+        }
+      } else {
+        leaderboard.push({ name: this.player_name, score: this.score })
+      }
+
+      leaderboard.sort((a, b) => b.score - a.score)
+      localStorage.setItem(storageKey, JSON.stringify(leaderboard))
+    },
+    changePilot() {
+      this.gameOver = false
+      this.gameStart = true
+      this.player_name = ''
     },
   },
 })
@@ -172,12 +215,27 @@ export default defineComponent({
           </tbody>
         </table>
       </div>
-      <div v-if="gameOver">
+      <div v-if="gameStart" class="screen-box">
+        <h2>Enter your name, pilot!</h2>
+        <input
+          type="text"
+          v-model="player_name"
+          placeholder="Citizen Name..."
+          class="name-input"
+          @keyup.enter="start()"
+        />
+        <button class="submit-btn" @click="start()">enlist & do your part!</button>
+      </div>
+      <div v-if="gameOver" class="screen-box">
         <h1>GAME OVER</h1>
         <h2 class="stat-name">total score</h2>
         <h1 class="stat-score">{{ score }}</h1>
+        <div class="game-over-buttons">
+          <button class="submit-btn" @click="start()">FIGHT AGAIN!</button>
+          <button class="submit-btn" @click="changePilot()">CHANGE PILOT</button>
+        </div>
       </div>
-      <div v-if="!levelStats && !gameOver" class="sequence-display">
+      <div v-if="!gameStart && !gameOver && !levelStats" class="sequence-display">
         <h2>Level: {{ level }}</h2>
         <TimerBar :time="time" :running="isTimerRunning" @timeout="handleTimeout" />
         <h2 class="strat-name">{{ currentStratagem?.name }}</h2>
@@ -324,6 +382,50 @@ h1 {
 .shake {
   animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   transform: translate3d(0, 0, 0);
+}
+
+.screen-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+}
+
+.name-input {
+  background-color: #111315;
+  border: 2px solid #ffc72c;
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  font-size: 1.1rem;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  width: 280px;
+  outline: none;
+}
+
+.submit-btn {
+  background-color: #ffc72c;
+  color: #121417;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  font-family: 'Courier New', Courier, monospace;
+  margin-top: 0.5rem;
+}
+
+.submit-btn:hover {
+  background-color: #ffd859;
+}
+
+.game-over-buttons {
+  display: flex;
+  gap: 1rem;
 }
 
 @keyframes shake {
