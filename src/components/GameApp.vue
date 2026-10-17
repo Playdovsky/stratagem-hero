@@ -185,95 +185,81 @@ export default defineComponent({
 </script>
 
 <template>
-  <main class="game-main">
-    <div class="game-container">
-      <div v-if="levelStats && !gameOver">
-        <h1>LEVEL {{ level }}</h1>
-        <div class="stats"></div>
-        <table>
-          <tbody>
-            <tr>
-              <td class="stat-name">Round bonus</td>
-              <td class="table-space"></td>
-              <td class="stat-score">{{ round_bonus }}</td>
-            </tr>
-            <tr>
-              <td class="stat-name">Time Bonus</td>
-              <td class="table-space"></td>
-              <td class="stat-score">{{ time_bonus }}</td>
-            </tr>
-            <tr>
-              <td class="stat-name">Perfect Bonus</td>
-              <td class="table-space"></td>
-              <td class="stat-score">{{ perfect_bonus }}</td>
-            </tr>
-            <tr>
-              <td class="stat-name">Total Score</td>
-              <td class="table-space"></td>
-              <td class="stat-score">{{ score }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div v-if="gameStart" class="screen-box">
-        <h2>Enter your name, pilot!</h2>
-        <input
-          type="text"
-          v-model="player_name"
-          placeholder="Citizen Name..."
-          class="name-input"
-          @keyup.enter="start()"
-        />
-        <button class="submit-btn" @click="start()">enlist & do your part!</button>
-      </div>
-      <div v-if="gameOver" class="screen-box">
-        <h1>GAME OVER</h1>
-        <h2 class="stat-name">total score</h2>
-        <h1 class="stat-score">{{ score }}</h1>
-        <div class="game-over-buttons">
-          <button class="submit-btn" @click="start()">FIGHT AGAIN!</button>
-          <button class="submit-btn" @click="changePilot()">CHANGE PILOT</button>
-        </div>
-      </div>
-      <div v-if="!gameStart && !gameOver && !levelStats" class="sequence-display">
-        <h2>Level: {{ level }}</h2>
-        <TimerBar :time="time" :running="isTimerRunning" @timeout="handleTimeout" />
-        <h2 class="strat-name">{{ currentStratagem?.name }}</h2>
-        <div class="strata-pictures">
-          <img
-            v-if="previousStratagem"
-            :src="previousStratagem?.path"
-            class="side-strata-picture"
-          />
-          <div v-else class="side-strata-placeholder"></div>
-          <img :src="currentStratagem?.path" class="strata-picture" />
-          <img v-if="nextStratagem" :src="nextStratagem?.path" class="side-strata-picture" />
-          <div v-else class="side-strata-placeholder"></div>
-        </div>
-        <div class="arrows-container" :class="{ shake: isShaking }">
-          <img
-            v-for="(arrow, a) in currentStratagem?.code"
-            :key="a"
-            :src="getArrowPath(arrow)"
-            class="arrow-icon"
-            :class="{ 'arrow-passed': a < arrow_index }"
-          />
-        </div>
-      </div>
-      <!-- <p v-else class="placeholder-text">SYSTEM READY. WAITING FOR PILOT...</p> -->
+  <div class="game-container">
+    <div v-if="levelStats && !gameOver">
+      <h1>LEVEL {{ level }}</h1>
+      <div class="stats"></div>
+      <table>
+        <tbody>
+          <tr>
+            <td class="stat-name">Round bonus</td>
+            <td class="table-space"></td>
+            <td class="stat-score">{{ round_bonus }}</td>
+          </tr>
+          <tr>
+            <td class="stat-name">Time Bonus</td>
+            <td class="table-space"></td>
+            <td class="stat-score">{{ time_bonus }}</td>
+          </tr>
+          <tr>
+            <td class="stat-name">Perfect Bonus</td>
+            <td class="table-space"></td>
+            <td class="stat-score">{{ perfect_bonus }}</td>
+          </tr>
+          <tr>
+            <td class="stat-name">Total Score</td>
+            <td class="table-space"></td>
+            <td class="stat-score">{{ score }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </main>
+    <div v-if="gameStart" class="screen-box">
+      <h2>Enter your name, pilot!</h2>
+      <input
+        type="text"
+        v-model="player_name"
+        placeholder="Citizen Name..."
+        class="name-input"
+        @keyup.enter="start()"
+      />
+      <button class="submit-btn" @click="start()">enlist & do your part!</button>
+    </div>
+    <div v-if="gameOver" class="screen-box">
+      <h1>GAME OVER</h1>
+      <h2 class="stat-name">total score</h2>
+      <h1 class="stat-score">{{ score }}</h1>
+      <div class="game-over-buttons">
+        <button class="submit-btn" @click="start()">FIGHT AGAIN!</button>
+        <button class="submit-btn" @click="changePilot()">CHANGE PILOT</button>
+      </div>
+    </div>
+    <div v-if="!gameStart && !gameOver && !levelStats" class="sequence-display">
+      <h2>Level: {{ level }}</h2>
+      <TimerBar :time="time" :running="isTimerRunning" @timeout="handleTimeout" />
+      <h2 class="strat-name">{{ currentStratagem?.name }}</h2>
+      <div class="strata-pictures">
+        <img v-if="previousStratagem" :src="previousStratagem?.path" class="side-strata-picture" />
+        <div v-else class="side-strata-placeholder"></div>
+        <img :src="currentStratagem?.path" class="strata-picture" />
+        <img v-if="nextStratagem" :src="nextStratagem?.path" class="side-strata-picture" />
+        <div v-else class="side-strata-placeholder"></div>
+      </div>
+      <div class="arrows-container" :class="{ shake: isShaking }">
+        <img
+          v-for="(arrow, a) in currentStratagem?.code"
+          :key="a"
+          :src="getArrowPath(arrow)"
+          class="arrow-icon"
+          :class="{ 'arrow-passed': a < arrow_index }"
+        />
+      </div>
+    </div>
+    <!-- <p v-else class="placeholder-text">SYSTEM READY. WAITING FOR PILOT...</p> -->
+  </div>
 </template>
 
 <style scoped>
-.game-main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-}
-
 .game-container {
   width: 100%;
   max-width: 50rem;
