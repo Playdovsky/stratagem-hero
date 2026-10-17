@@ -34,9 +34,11 @@ export default defineComponent({
   <div class="leaderboard-container">
     <table v-if="leaderboard.length > 0">
       <thead>
-        <th>RANK</th>
-        <th>PILOT</th>
-        <th>SCORE</th>
+        <tr>
+          <td>RANK</td>
+          <td>PILOT</td>
+          <td>SCORE</td>
+        </tr>
       </thead>
       <tbody>
         <tr v-for="(entry, index) in leaderboard" :key="index">
@@ -73,7 +75,7 @@ table {
   font-family: 'Courier New', Courier, monospace;
 }
 
-th {
+thead {
   color: #ffc72c;
   border-bottom: 2px solid #ffc72c;
   padding: 10px;

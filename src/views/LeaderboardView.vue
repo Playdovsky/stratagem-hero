@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Leaderboard from '../components/LeaderBoard.vue'
 import Footer from '../components/SuperFooter.vue'
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
@@ -11,7 +11,7 @@ import { RouterLink, RouterView } from 'vue-router'
       <h3>SUPER EARTH ARMED FORCES - STRATAGEM HERO</h3>
       <div class="header-right">
         <RouterLink class="view-redirect" to="/">
-          <input type="image" class="header-buttons" src="src/assets/icons/trophy-icon.svg"
+          <input type="image" class="header-buttons" src="src/assets/icons/helldivers-icon.svg"
         /></RouterLink>
       </div>
     </header>

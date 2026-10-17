@@ -1,50 +1,61 @@
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent } from 'vue'
 import Game from '../components/GameApp.vue'
 import Footer from '../components/SuperFooter.vue'
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink } from 'vue-router'
 
-import { ref, onMounted, onUnmounted } from 'vue'
+export default defineComponent({
+  components: {
+    Game,
+    Footer,
+    RouterLink,
+  },
+  data() {
+    return {
+      audio: null as HTMLAudioElement | null,
+      timerId: null as number | null,
+    }
+  },
+  mounted() {
+    this.timerId = window.setTimeout(() => {
+      this.audio = new Audio('/src/assets/sound/helldivers2_8bit.webm')
+      this.audio.loop = true
+      this.audio.volume = 0.5
+      this.playMusic()
+    }, 3000)
+  },
+  methods: {
+    toggleMusic() {
+      if (!this.audio) return
 
-const audio = ref(null)
+      if (this.audio.paused) {
+        this.playMusic()
+      } else {
+        this.pauseMusic()
+      }
+    },
+    playMusic() {
+      if (!this.audio) return
 
-onMounted(() => {
-  setTimeout(() => {
-    audio.value = new Audio('/src/assets/sound/helldivers2_8bit.webm')
+      this.audio.play()
+    },
+    pauseMusic() {
+      if (!this.audio) return
 
-    audio.value.loop = true
-    audio.value.volume = 0.5
+      this.audio.pause()
+    },
+  },
+  beforeUnmount() {
+    if (this.timerId !== null) {
+      clearTimeout(this.timerId)
+      this.timerId = null
+    }
 
-    playMusic()
-  }, 3000)
-})
-
-const toggleMusic = () => {
-  if (!audio.value) return
-
-  if (audio.value.paused) {
-    audio.value.play()
-  } else {
-    audio.value.pause()
-  }
-}
-
-const playMusic = () => {
-  if (!audio.value) return
-
-  audio.value.play()
-}
-
-const pauseMusic = () => {
-  if (!audio.value) return
-
-  audio.value.pause()
-}
-
-onUnmounted(() => {
-  if (audio.value) {
-    audio.value.pause()
-    audio.value = null
-  }
+    if (this.audio) {
+      this.audio.pause()
+      this.audio = null
+    }
+  },
 })
 </script>
 
