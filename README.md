@@ -1,48 +1,41 @@
-# stratagem-hero
+# 🎮 Stratagem Hero - Helldivers 2 Fan Game
 
-This template should help get you started developing with Vue 3 in Vite.
+A web-based clone of the popular minigame "Stratagem Hero" from _Helldivers 2_, built as a web application uni/portfolio project. Test your speed, accuracy, and under-pressure typing skills to spread Managed Democracy across the galaxy!
 
-## Recommended IDE Setup
+![Project Banner / Screenshot Placeholder](./src/assets/icons/trophy-icon.svg)
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+---
 
-## Recommended Browser Setup
+## 🚀 Tech Stack
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- **Framework:** Vue 3 (Options API)
+- **Language:** TypeScript
+- **Routing:** Vue Router
+- **Styling:** CSS3 (Flexbox, CSS Grid, custom animations)
+- **Data Storage:** Browser LocalStorage (for local leaderboards)
+- **Build Tool:** Vite
 
-## Type Support for `.vue` Imports in TS
+---
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## ✨ Features
 
-## Customize configuration
+1. **Core Gameplay:** Fast-paced stratagem code input using arrow keys or WASD, featuring failing penalties, round/time/perfect bonuses, and escalating speed per level.
+2. **Local Leaderboard:** Persistent high-score tracking using `LocalStorage`, allowing multiple local players to compete for the top spot.
+3. **Immersive Atmosphere:** Background 8-bit Helldivers music, dynamic marquee propaganda scroller, and authentic CRT-inspired terminal styling.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+---
 
-## Project Setup
+## 🛠️ Getting Started Locally
 
-```sh
-npm install
-```
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/YOUR_USERNAME/stratagem-hero.git](https://github.com/Playdovsky/stratagem-hero.git)
+   ```
 
-### Compile and Hot-Reload for Development
+---
 
-```sh
-npm run dev
-```
+## ⚖️ License & Disclaimer
 
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- **Code:** Licensed under the MIT License.
+- **Assets:** Stratagem and arrow icons originate from the Helldivers Wiki and are used under the Creative Commons Attribution-ShareAlike (CC-BY-SA) license.
+- **Disclaimer:** This is a non-commercial, fan-made uni/portfolio project. Helldivers 2 and all associated assets, names, and trademarks are the property of Arrowhead Game Studios and Sony Interactive Entertainment.

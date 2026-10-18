@@ -13,6 +13,9 @@ import { RouterLink } from 'vue-router'
         <RouterLink class="view-redirect" to="/">
           <input type="image" class="header-buttons" src="src/assets/icons/helldivers-icon.svg"
         /></RouterLink>
+        <RouterLink class="view-redirect" to="/credits">
+          <input type="image" class="header-buttons" src="src/assets/icons/medal-icon.svg"
+        /></RouterLink>
       </div>
     </header>
     <main class="game-main">

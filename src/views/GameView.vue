@@ -72,6 +72,13 @@ export default defineComponent({
             src="src/assets/icons/trophy-icon.svg"
             @click="pauseMusic()"
         /></RouterLink>
+        <RouterLink class="view-redirect" to="/credits">
+          <input
+            type="image"
+            class="header-buttons"
+            src="src/assets/icons/medal-icon.svg"
+            @click="pauseMusic()"
+        /></RouterLink>
         <input
           type="image"
           class="header-buttons"
