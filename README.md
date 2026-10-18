@@ -2,8 +2,6 @@
 
 A web-based clone of the popular minigame "Stratagem Hero" from _Helldivers 2_, built as a web application uni/portfolio project. Test your speed, accuracy, and under-pressure typing skills to spread Managed Democracy across the galaxy!
 
-![Project Banner / Screenshot Placeholder](./src/assets/icons/trophy-icon.svg)
-
 ---
 
 ## 🚀 Tech Stack
@@ -22,15 +20,6 @@ A web-based clone of the popular minigame "Stratagem Hero" from _Helldivers 2_, 
 1. **Core Gameplay:** Fast-paced stratagem code input using arrow keys or WASD, featuring failing penalties, round/time/perfect bonuses, and escalating speed per level.
 2. **Local Leaderboard:** Persistent high-score tracking using `LocalStorage`, allowing multiple local players to compete for the top spot.
 3. **Immersive Atmosphere:** Background 8-bit Helldivers music, dynamic marquee propaganda scroller, and authentic CRT-inspired terminal styling.
-
----
-
-## 🛠️ Getting Started Locally
-
-1. Clone the repository:
-   ```bash
-   git clone [https://github.com/YOUR_USERNAME/stratagem-hero.git](https://github.com/Playdovsky/stratagem-hero.git)
-   ```
 
 ---
 
