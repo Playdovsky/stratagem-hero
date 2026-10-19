@@ -358,6 +358,7 @@ table {
 
 h2 {
   text-align: center !important;
+  color: white;
 }
 
 h1 {

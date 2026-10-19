@@ -94,6 +94,14 @@
   transition: transform 0.1s ease;
 }
 
+h2 {
+  color: #ffc72c;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 @keyframes scroll-right {
   from {
     transform: translateX(-50%);

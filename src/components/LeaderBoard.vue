@@ -32,6 +32,7 @@ export default defineComponent({
 
 <template>
   <div class="leaderboard-container">
+    <h2>Leaderboard</h2>
     <table v-if="leaderboard.length > 0">
       <thead>
         <tr>

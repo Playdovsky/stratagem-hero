@@ -62,10 +62,27 @@ export default defineComponent({
 <template>
   <div class="game-wrapper">
     <header class="super-header">
-      <div class="header-left"></div>
+      <div class="header-left">
+        <input
+          type="image"
+          class="header-buttons"
+          src="src/assets/icons/music-icon.svg"
+          @click="toggleMusic()"
+        />
+      </div>
       <h3>SUPER EARTH ARMED FORCES - STRATAGEM HERO</h3>
       <div class="header-right">
+        <RouterLink class="view-redirect" to="/">
+          <input type="image" class="header-buttons" src="src/assets/icons/helldivers-icon.svg"
+        /></RouterLink>
         <RouterLink class="view-redirect" to="/leaderboard">
+          <RouterLink class="view-redirect" to="/strata-academy">
+            <input
+              type="image"
+              class="header-buttons"
+              src="src/assets/icons/pawn-icon.svg"
+              @click="pauseMusic()"
+          /></RouterLink>
           <input
             type="image"
             class="header-buttons"
@@ -79,12 +96,6 @@ export default defineComponent({
             src="src/assets/icons/medal-icon.svg"
             @click="pauseMusic()"
         /></RouterLink>
-        <input
-          type="image"
-          class="header-buttons"
-          src="src/assets/icons/music-icon.svg"
-          @click="toggleMusic()"
-        />
       </div>
     </header>
     <main class="game-main">

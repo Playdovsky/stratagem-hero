@@ -3,7 +3,6 @@
 <template>
   <div class="credits-container">
     <h2>SPECIAL THANKS</h2>
-
     <table class="credits-table">
       <tbody>
         <tr>
@@ -54,14 +53,6 @@
   font-family: 'Courier New', Courier, monospace;
 }
 
-h2 {
-  color: #ffc72c;
-  letter-spacing: 2px;
-  margin-bottom: 2rem;
-  text-align: center;
-  text-transform: uppercase;
-}
-
 .credits-table {
   width: 100%;
   border-collapse: collapse;
@@ -71,7 +62,7 @@ h2 {
 .credits-table td {
   padding: 12px 10px;
   border-bottom: 2px dotted #444;
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
 .credit-target {
