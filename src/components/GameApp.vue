@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Stratagems } from '@/assets/stratagems/helldivers-stratagems-data-sample.js'
-import { Arrows } from '@/assets/stratagems/helldivers-stratagems-arrows.js'
+import { Stratagems } from '@/assets/stratagems/helldivers-stratagems-data'
+import { Arrows } from '@/assets/stratagems/helldivers-stratagems-arrows'
 import TimerBar from '@/components/TimerBar.vue'
 
 interface Stratagem {
@@ -44,15 +44,15 @@ export default defineComponent({
   computed: {
     currentStratagem(): Stratagem | null {
       if (this.strata_sequence.length === 0) return null
-      return this.strata_sequence[this.sequence_index]
+      return this.strata_sequence[this.sequence_index] || null
     },
     nextStratagem(): Stratagem | null {
       if (this.strata_sequence.length === 0) return null
-      return this.strata_sequence[this.sequence_index + 1]
+      return this.strata_sequence[this.sequence_index + 1] || null
     },
     previousStratagem(): Stratagem | null {
       if (this.strata_sequence.length === 0) return null
-      return this.strata_sequence[this.sequence_index - 1]
+      return this.strata_sequence[this.sequence_index - 1] || null
     },
   },
   mounted() {
@@ -86,12 +86,13 @@ export default defineComponent({
 
       for (let i = 0; i < 6; i++) {
         const randomIndex = Math.floor(Math.random() * this.all_stratagems.length)
-        this.strata_sequence.push(this.all_stratagems[randomIndex])
+        const stratagem = this.all_stratagems[randomIndex]
+        if (stratagem) this.strata_sequence.push(stratagem)
       }
     },
     getArrowPath(arrowName: string): string {
       const found = this.all_arrows.find((a) => a.name.toLowerCase() === arrowName.toLowerCase())
-      return found.path
+      return found?.path || ''
     },
     handleKeyDown(event: KeyboardEvent) {
       if (!this.currentStratagem) return
@@ -165,8 +166,9 @@ export default defineComponent({
       )
 
       if (existingPlayerIndex !== -1) {
-        if (this.score > leaderboard[existingPlayerIndex].score) {
-          leaderboard[existingPlayerIndex].score = this.score
+        const existingPlayer = leaderboard[existingPlayerIndex]
+        if (existingPlayer && this.score > existingPlayer.score) {
+          existingPlayer.score = this.score
         }
       } else {
         leaderboard.push({ name: this.player_name, score: this.score })

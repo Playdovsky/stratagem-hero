@@ -27,7 +27,7 @@ const CATEGORIES = [
     id: 'd6e15727-9fe1-4961-8c5b-ea44a9bd81aa',
     name: 'General Stategems',
   },
-];
+]
 
 const PATRIOTIC_ADMINISTRATION_CENTER = [
   {
@@ -75,7 +75,7 @@ const PATRIOTIC_ADMINISTRATION_CENTER = [
     code: ['down', 'down', 'up', 'down', 'down'],
     category_id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
   },
-];
+]
 
 const ORBITAL_CANNONS = [
   {
@@ -113,7 +113,7 @@ const ORBITAL_CANNONS = [
     code: ['right', 'up', 'down', 'down', 'right'],
     category_id: '3958dc9e-742f-4377-85e9-fec4b6a6442a',
   },
-];
+]
 
 const HANGER = [
   {
@@ -161,7 +161,7 @@ const HANGER = [
     code: ['up', 'up', 'left', 'up', 'right'],
     category_id: '3958dc9e-737f-4377-85e9-fec4b6a6442a',
   },
-];
+]
 
 const BRIDGE = [
   {
@@ -199,7 +199,7 @@ const BRIDGE = [
     code: ['down', 'up', 'right', 'up', 'left', 'right'],
     category_id: '50ca3e18-62cd-11ee-8c99-0242ac120002',
   },
-];
+]
 
 const ENGINEERING_BAY = [
   {
@@ -247,7 +247,7 @@ const ENGINEERING_BAY = [
     code: ['down', 'up', 'left', 'right', 'left', 'right'],
     category_id: '3958dc9e-787f-4377-85e9-fec4b6a6442a',
   },
-];
+]
 
 const ROBOTICS_WORKSHOP = [
   {
@@ -285,7 +285,7 @@ const ROBOTICS_WORKSHOP = [
     code: ['down', 'up', 'right', 'down', 'right'],
     category_id: '76d65c26-f784-44a2-ac19-586678f7c2f2',
   },
-];
+]
 
 const GENERAL_STRATEGEMS = [
   {
@@ -313,7 +313,7 @@ const GENERAL_STRATEGEMS = [
     code: ['right', 'up', 'up', 'down'],
     category_id: 'd6e15727-9fe1-4961-8c5b-ea44a9bd81aa',
   },
-    {
+  {
     name: 'Seismic Probe',
     code: ['up', 'up', 'left', 'right', 'down', 'down'],
     category_id: 'd6e15727-9fe1-4961-8c5b-ea44a9bd81aa',
@@ -333,4 +333,4 @@ const GENERAL_STRATEGEMS = [
     code: ['right', 'right', 'left', 'left'],
     category_id: 'd6e15727-9fe1-4961-8c5b-ea44a9bd81aa',
   },
-];
+]

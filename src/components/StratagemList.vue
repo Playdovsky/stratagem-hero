@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Stratagems } from '@/assets/stratagems/helldivers-stratagems-data-sample.js'
-import { Arrows } from '@/assets/stratagems/helldivers-stratagems-arrows.js'
+import { Stratagems } from '@/assets/stratagems/helldivers-stratagems-data'
+import { Arrows } from '@/assets/stratagems/helldivers-stratagems-arrows'
 
 interface Stratagem {
   name: string
@@ -25,7 +25,7 @@ export default defineComponent({
   methods: {
     getArrowPath(arrowName: string): string {
       const found = this.all_arrows.find((a) => a.name.toLowerCase() === arrowName.toLowerCase())
-      return found.path
+      return found?.path || ''
     },
   },
 })
