@@ -1,13 +1,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Game from '../components/GameApp.vue'
-import Footer from '../components/SuperFooter.vue'
+import SuperFooter from '../components/SuperFooter.vue'
 import { RouterLink } from 'vue-router'
 
 export default defineComponent({
   components: {
     Game,
-    Footer,
+    SuperFooter,
     RouterLink,
   },
   data() {
@@ -105,7 +105,7 @@ export default defineComponent({
     <main class="game-main">
       <Game />
     </main>
-    <Footer />
+    <SuperFooter />
   </div>
 </template>
 

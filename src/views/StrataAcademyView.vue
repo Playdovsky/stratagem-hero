@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import StratagemList from '../components/StratagemList.vue'
-import Footer from '../components/SuperFooter.vue'
+import SuperFooter from '../components/SuperFooter.vue'
 import { RouterLink } from 'vue-router'
 </script>
 
@@ -27,7 +27,7 @@ import { RouterLink } from 'vue-router'
     <main class="game-main">
       <StratagemList />
     </main>
-    <Footer />
+    <SuperFooter />
   </div>
 </template>
 

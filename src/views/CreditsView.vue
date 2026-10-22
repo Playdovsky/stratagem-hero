@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Credits from '../components/CreditsList.vue'
-import Footer from '../components/SuperFooter.vue'
+import SuperFooter from '../components/SuperFooter.vue'
 import { RouterLink } from 'vue-router'
 </script>
 
@@ -27,7 +27,7 @@ import { RouterLink } from 'vue-router'
     <main class="game-main">
       <Credits />
     </main>
-    <Footer />
+    <SuperFooter />
   </div>
 </template>
 
