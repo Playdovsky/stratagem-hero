@@ -87,11 +87,11 @@
 }
 
 .header-buttons {
-  width: 28px;
-  height: 28px;
+  width: 1.5rem;
   cursor: pointer;
   padding-inline-start: 1rem;
   transition: transform 0.1s ease;
+  opacity: 1;
 }
 
 h2 {

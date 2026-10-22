@@ -14,6 +14,7 @@ export default defineComponent({
     return {
       audio: null as HTMLAudioElement | null,
       timerId: null as number | null,
+      audioStatus: true,
     }
   },
   mounted() {
@@ -29,8 +30,10 @@ export default defineComponent({
       if (!this.audio) return
 
       if (this.audio.paused) {
+        this.audioStatus = true
         this.playMusic()
       } else {
+        this.audioStatus = false
         this.pauseMusic()
       }
     },
@@ -68,6 +71,7 @@ export default defineComponent({
           class="header-buttons"
           src="src/assets/icons/music-icon.svg"
           @click="toggleMusic()"
+          :class="{ muted: !audioStatus }"
         />
       </div>
       <h3>SUPER EARTH ARMED FORCES - STRATAGEM HERO</h3>
@@ -105,4 +109,8 @@ export default defineComponent({
   </div>
 </template>
 
-<style></style>
+<style scoped>
+.muted {
+  opacity: 0.5;
+}
+</style>
