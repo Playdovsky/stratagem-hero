@@ -9,6 +9,7 @@ interface Stratagem {
   code: string[]
   category_id: string
   path: string
+  category: string
 }
 
 interface Arrow {
