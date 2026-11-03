@@ -84,6 +84,7 @@ export default defineComponent({
             <input
               type="image"
               class="header-buttons"
+              id="pawn-icon"
               src="src/assets/icons/pawn-icon.svg"
               @click="pauseMusic()"
           /></RouterLink>
@@ -97,6 +98,7 @@ export default defineComponent({
           <input
             type="image"
             class="header-buttons"
+            id="medal-icon"
             src="src/assets/icons/medal-icon.svg"
             @click="pauseMusic()"
         /></RouterLink>
@@ -112,5 +114,9 @@ export default defineComponent({
 <style scoped>
 .muted {
   opacity: 0.5;
+}
+
+#pawn-icon {
+  margin-right: 0.5rem;
 }
 </style>

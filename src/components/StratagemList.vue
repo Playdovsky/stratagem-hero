@@ -94,6 +94,7 @@ export default defineComponent({
   padding: 2rem;
   color: #ffffff;
   font-family: 'Courier New', Courier, monospace;
+  overflow: hidden;
 }
 
 .stratagem-table-container > h2 {

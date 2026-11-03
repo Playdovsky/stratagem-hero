@@ -1,3 +1,8 @@
+html,
+body {
+  margin: 0;
+}
+
 .game-wrapper {
   display: flex;
   flex-direction: column;
@@ -37,6 +42,7 @@
   justify-content: flex-start;
   align-items: center;
   gap: 0.5rem;
+  margin-left: 1rem;
 }
 
 .super-header h3 {
@@ -51,6 +57,7 @@
   justify-content: flex-end;
   align-items: center;
   gap: 0.5rem;
+  margin-right: 1rem;
 }
 
 .game-main {
@@ -100,6 +107,10 @@ h2 {
   margin-bottom: 2rem;
   text-align: center;
   text-transform: uppercase;
+}
+
+#medal-icon {
+  width: 1.6rem;
 }
 
 @keyframes scroll-right {

@@ -28,7 +28,7 @@ export default defineComponent({
       round_bonus: 100,
       perfect_bonus: 100,
       level: 1,
-      time: 40000,
+      time: 30000,
       time_bonus: 0,
       isTimerRunning: true,
       all_stratagems: Stratagems as Stratagem[],
@@ -72,7 +72,7 @@ export default defineComponent({
       this.level = 1
       this.sequence_index = 0
       this.arrow_index = 0
-      this.time = 40000
+      this.time = 30000
 
       this.gameStart = false
       this.gameOver = false
@@ -141,7 +141,7 @@ export default defineComponent({
         this.levelStats = false
         this.perfect_bonus = 100
         this.round_bonus = 100
-        this.time = Math.max(10000, 40000 - (this.level - 1) * 5000)
+        this.time = Math.max(10000, 30000 - (this.level - 1) * 5000)
         this.rndStrataSequence()
       }, 6000)
     },

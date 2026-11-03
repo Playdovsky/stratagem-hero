@@ -20,7 +20,11 @@ import { RouterLink } from 'vue-router'
           <input type="image" class="header-buttons" src="src/assets/icons/trophy-icon.svg"
         /></RouterLink>
         <RouterLink class="view-redirect" to="/credits">
-          <input type="image" class="header-buttons" src="src/assets/icons/medal-icon.svg"
+          <input
+            type="image"
+            class="header-buttons"
+            id="medal-icon"
+            src="src/assets/icons/medal-icon.svg"
         /></RouterLink>
       </div>
     </header>
