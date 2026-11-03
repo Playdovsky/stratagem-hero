@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import GameView from './views/GameView.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <router-view />

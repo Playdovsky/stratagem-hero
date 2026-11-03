@@ -160,7 +160,7 @@ export default defineComponent({
     saveScoreToLocalStorage() {
       const storageKey = 'stratagem-hero_leaderboard'
       const savedData = localStorage.getItem(storageKey)
-      let leaderboard: { name: string; score: number }[] = savedData ? JSON.parse(savedData) : []
+      const leaderboard: { name: string; score: number }[] = savedData ? JSON.parse(savedData) : []
 
       const existingPlayerIndex = leaderboard.findIndex(
         (p) => p.name.toLowerCase() === this.player_name.toLowerCase(),

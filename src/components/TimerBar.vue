@@ -24,7 +24,7 @@ timeoutId.value = window.setTimeout(() => {
 }, props.time)
 
 const stopTimer = () => {
-  if (timeoutId !== null) {
+  if (timeoutId.value !== null) {
     clearTimeout(timeoutId.value)
     timeoutId.value = null
   }
