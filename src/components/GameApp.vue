@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Stratagems } from '@/assets/stratagems/helldivers-stratagems-data'
-import { Arrows } from '@/assets/stratagems/helldivers-stratagems-arrows'
+import { Stratagems } from '@/stratagems/helldivers-stratagems-data'
+import { Arrows } from '@/stratagems/helldivers-stratagems-arrows'
 import TimerBar from '@/components/TimerBar.vue'
 
 interface Stratagem {

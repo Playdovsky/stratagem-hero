@@ -19,7 +19,7 @@ export default defineComponent({
   },
   mounted() {
     this.timerId = window.setTimeout(() => {
-      this.audio = new Audio('/src/assets/sound/helldivers2_8bit.webm')
+      this.audio = new Audio('assets/sound/helldivers2_8bit.webm')
       this.audio.loop = true
       this.audio.volume = 0.5
       this.playMusic()
@@ -69,7 +69,7 @@ export default defineComponent({
         <input
           type="image"
           class="header-buttons"
-          src="src/assets/icons/music-icon.svg"
+          src="assets/icons/music-icon.svg"
           @click="toggleMusic()"
           :class="{ muted: !audioStatus }"
         />
@@ -77,7 +77,7 @@ export default defineComponent({
       <h3>SUPER EARTH ARMED FORCES - STRATAGEM HERO</h3>
       <div class="header-right">
         <RouterLink class="view-redirect" to="/">
-          <input type="image" class="header-buttons" src="src/assets/icons/helldivers-icon.svg"
+          <input type="image" class="header-buttons" src="assets/icons/helldivers-icon.svg"
         /></RouterLink>
         <RouterLink class="view-redirect" to="/leaderboard">
           <RouterLink class="view-redirect" to="/strata-academy">
@@ -85,13 +85,13 @@ export default defineComponent({
               type="image"
               class="header-buttons"
               id="pawn-icon"
-              src="src/assets/icons/pawn-icon.svg"
+              src="assets/icons/pawn-icon.svg"
               @click="pauseMusic()"
           /></RouterLink>
           <input
             type="image"
             class="header-buttons"
-            src="src/assets/icons/trophy-icon.svg"
+            src="assets/icons/trophy-icon.svg"
             @click="pauseMusic()"
         /></RouterLink>
         <RouterLink class="view-redirect" to="/credits">
@@ -99,7 +99,7 @@ export default defineComponent({
             type="image"
             class="header-buttons"
             id="medal-icon"
-            src="src/assets/icons/medal-icon.svg"
+            src="assets/icons/medal-icon.svg"
             @click="pauseMusic()"
         /></RouterLink>
       </div>

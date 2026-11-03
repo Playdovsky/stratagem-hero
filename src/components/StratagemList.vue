@@ -1,8 +1,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Stratagems } from '@/assets/stratagems/helldivers-stratagems-data'
-import { Arrows } from '@/assets/stratagems/helldivers-stratagems-arrows'
-import { Categories } from '@/assets/stratagems/helldivers-stratagems-categories'
+import { Stratagems } from '@/stratagems/helldivers-stratagems-data'
+import { Arrows } from '@/stratagems/helldivers-stratagems-arrows'
+import { Categories } from '@/stratagems/helldivers-stratagems-categories'
 
 interface Stratagem {
   name: string
