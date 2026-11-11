@@ -113,6 +113,10 @@ export default defineComponent({
       const mappedDirection = keyMap[pressedKey]
       const expectedDirection = this.currentStratagem.code[this.arrow_index]
 
+      if (keyMap[pressedKey] === undefined) {
+        return
+      }
+
       if (mappedDirection === expectedDirection) {
         this.arrow_index++
       } else {
