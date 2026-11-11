@@ -35,6 +35,30 @@
           </td>
           <td class="credit-reason">.js const stratagem data</td>
         </tr>
+        <tr>
+          <td class="credit-target">
+            <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank">🥜</a>
+            <a href="https://www.linkedin.com/in/mateusz-rosiek143/" target="_blank">Orzech</a
+            ><a href="https://youtu.be/dQw4w9WgXcQ" target="_blank">🥜</a>
+          </td>
+          <td class="credit-reason">Manual testing</td>
+        </tr>
+        <tr>
+          <td class="credit-target">
+            <a href="https://youtu.be/iAeb1oDfuFc" target="_blank">Bruce</a>
+          </td>
+          <td class="credit-reason">Manual testing</td>
+        </tr>
+        <tr>
+          <td class="credit-target">
+            <a href="https://github.com/dawiisss" target="_blank">k3to</a>
+          </td>
+          <td class="credit-reason">Manual testing</td>
+        </tr>
+        <tr>
+          <td class="credit-target">Gumi</td>
+          <td class="credit-reason">Manual testing</td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -68,17 +92,14 @@
 .credit-target {
   text-align: left;
   width: 40%;
+  color: #ffc72c;
+  font-weight: bold;
 }
 
 .credit-target a {
   color: #ffc72c;
   text-decoration: none;
-  font-weight: bold;
   letter-spacing: 1px;
-}
-
-.credit-target a:hover {
-  text-decoration: underline;
 }
 
 .credit-reason {
