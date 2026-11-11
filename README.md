@@ -19,7 +19,8 @@ A web-based clone of the popular minigame "Stratagem Hero" from _Helldivers 2_, 
 
 1. **Core Gameplay:** Fast-paced stratagem code input using arrow keys or WASD, featuring failing penalties, round/time/perfect bonuses, and escalating speed per level.
 2. **Local Leaderboard:** Persistent high-score tracking using `LocalStorage`, allowing multiple local players to compete for the top spot.
-3. **Immersive Atmosphere:** Background 8-bit Helldivers music, dynamic marquee propaganda scroller, and authentic CRT-inspired terminal styling.
+3. **Stratagem Academy:** An overview of all Stratagems available in the game categorized by their tactical function.
+4. **Immersive Atmosphere:** Background 8-bit Helldivers music, dynamic marquee propaganda scroller, and authentic CRT-inspired terminal styling.
 
 ---
 
