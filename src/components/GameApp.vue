@@ -64,10 +64,6 @@ export default defineComponent({
   },
   methods: {
     start() {
-      if (!this.player_name.trim()) {
-        this.player_name = 'Super Earth Pilot'
-      }
-
       this.score = 0
       this.level = 1
       this.sequence_index = 0
@@ -79,6 +75,12 @@ export default defineComponent({
       this.isTimerRunning = true
 
       this.rndStrataSequence()
+    },
+    testName() {
+      const regex = /[!@#$%^&*()\-+={}[\]:;"'<>,.?\/|\\]/
+      if (regex.test(this.player_name)) {
+        return true
+      }
     },
     rndStrataSequence() {
       this.strata_sequence = []
@@ -230,7 +232,18 @@ export default defineComponent({
         class="name-input"
         @keyup.enter="start()"
       />
-      <button class="submit-btn" @click="start()">enlist & do your part!</button>
+      <span class="name-error" v-if="player_name.length != 0 && player_name.length < 5"
+        >Name too short!</span
+      >
+      <span class="name-error" v-if="player_name.length > 20">Name too long!</span>
+      <span class="name-error" v-if="testName()"> Invalid characters in name! </span>
+      <button
+        class="submit-btn"
+        @click="start()"
+        :disabled="testName() || !player_name || player_name.length > 20 || player_name.length < 5"
+      >
+        enlist & do your part!
+      </button>
     </div>
     <div v-if="gameOver" class="screen-box">
       <h1>GAME OVER</h1>
@@ -420,6 +433,13 @@ h1 {
 .game-over-buttons {
   display: flex;
   gap: 1rem;
+}
+
+name-error {
+  color: #ff4c4c;
+  font-size: 0.9rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 @keyframes shake {
