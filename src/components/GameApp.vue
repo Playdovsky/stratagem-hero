@@ -239,15 +239,22 @@ export default defineComponent({
         class="name-input"
         @keyup.enter="start()"
       />
-      <span class="name-error" v-if="player_name.length != 0 && player_name.length < 5"
+      <span
+        class="name-error"
+        v-if="player_name.trim().length != 0 && player_name.trim().length < 5"
         >Name too short!</span
       >
-      <span class="name-error" v-if="player_name.length > 20">Name too long!</span>
+      <span class="name-error" v-if="player_name.trim().length > 20">Name too long!</span>
       <span class="name-error" v-if="testName()"> Invalid characters in name! </span>
       <button
         class="submit-btn"
         @click="start()"
-        :disabled="testName() || !player_name || player_name.length > 20 || player_name.length < 5"
+        :disabled="
+          testName() ||
+          !player_name ||
+          player_name.trim().length > 20 ||
+          player_name.trim().length < 5
+        "
       >
         enlist & do your part!
       </button>
