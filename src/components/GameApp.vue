@@ -60,6 +60,9 @@ export default defineComponent({
     window.addEventListener('keydown', this.handleKeyDown)
   },
   beforeUnmount() {
+    if (this.player_name && this.score > 0) {
+      this.saveScoreToLocalStorage()
+    }
     window.removeEventListener('keydown', this.handleKeyDown)
   },
   methods: {
