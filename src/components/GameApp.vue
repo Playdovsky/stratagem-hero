@@ -100,6 +100,10 @@ export default defineComponent({
     handleKeyDown(event: KeyboardEvent) {
       if (!this.currentStratagem) return
 
+      if (event.code.startsWith('Numpad')) {
+        return
+      }
+
       const keyMap: Record<string, string> = {
         arrowup: 'up',
         w: 'up',
